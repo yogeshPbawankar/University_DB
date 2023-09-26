@@ -1,0 +1,220 @@
+1] Find the titles of courses in the Comp. Sci. department that have 3 credits. 
+
+mysql> select title from course where dept_name = 'Comp. Sci.' and credits = 3;
++--------------------------+
+| title                    |
++--------------------------+
+| Robotics                 |
+| Image Processing         |
+| Database System Concepts |
++--------------------------+
+
+2] Find the department names of all instructors.
+
+mysql> select dept_name from instructor;
++------------+
+| dept_name  |
++------------+
+| Biology    |
+| Comp. Sci. |
+| Comp. Sci. |
+| Comp. Sci. |
+| Elec. Eng. |
+| Finance    |
+| Finance    |
+| History    |
+| History    |
+| Music      |
+| Physics    |
+| Physics    |
++------------+
+
+3] Find the department names of all instructors(eliminate duplicate entry).
+
+mysql> select distinct(dept_name) from instructor;
++------------+
+| dept_name  |
++------------+
+| Biology    |
+| Comp. Sci. |
+| Elec. Eng. |
+| Finance    |
+| History    |
+| Music      |
+| Physics    |
++------------+
+
+4] Find the  names of all instructors in the computer science department who have salary greater than 70000.
+
+mysql> select name from instructor where dept_name = 'Comp. Sci.' and salary > 70000;
++--------+
+| name   |
++--------+
+| Katz   |
+| Brandt |
++--------+
+
+5] Retrieve the names of all instructor along with their department names,department building.
+
+mysql> select name,department.dept_name,building from instructor,department where department.dept_name = instructor.dept_name;
++------------+------------+----------+
+| name       | dept_name  | building |
++------------+------------+----------+
+| Crick      | Biology    | Watson   |
+| Srinivasan | Comp. Sci. | Taylor   |
+| Katz       | Comp. Sci. | Taylor   |
+| Brandt     | Comp. Sci. | Taylor   |
+| Kim        | Elec. Eng. | Taylor   |
+| Wu         | Finance    | Painter  |
+| Singh      | Finance    | Painter  |
+| El Said    | History    | Painter  |
+| Califieri  | History    | Painter  |
+| Mozart     | Music      | Packard  |
+| Einstein   | Physics    | Watson   |
+| Gold       | Physics    | Watson   |
++------------+------------+----------+
+
+6] Find the names and course_id of all instructors.
+
+mysql> select course.course_id,instructor.name from instructor,course where course.dept_name = instructor.dept_name;
++-----------+------------+
+| course_id | name       |
++-----------+------------+
+| CS-101    | Srinivasan |
+| CS-190    | Srinivasan |
+| CS-315    | Srinivasan |
+| CS-319    | Srinivasan |
+| CS-347    | Srinivasan |
+| FIN-201   | Wu         |
+| MU-199    | Mozart     |
+| PHY-101   | Einstein   |
+| HIS-351   | El Said    |
+| PHY-101   | Gold       |
+| CS-101    | Katz       |
+| CS-190    | Katz       |
+| CS-315    | Katz       |
+| CS-319    | Katz       |
+| CS-347    | Katz       |
+| HIS-351   | Califieri  |
+| FIN-201   | Singh      |
+| BIO-101   | Crick      |
+| BIO-301   | Crick      |
+| BIO-399   | Crick      |
+| CS-101    | Brandt     |
+| CS-190    | Brandt     |
+| CS-315    | Brandt     |
+| CS-319    | Brandt     |
+| CS-347    | Brandt     |
+| EE-181    | Kim        |
++-----------+------------+
+
+7] Find the names and course_id of all instructors using tuple variable.
+
+
+8] For all instructor in the university who have taught some course,find their names and the course id of all course they taught.
+
+mysql> select name,teaches.course_id ,dept_name from teaches,instructor where instructor.ID = teaches.ID;
++------------+-----------+------------+
+| name       | course_id | dept_name  |
++------------+-----------+------------+
+| Crick      | BIO-101   | Biology    |
+| Crick      | BIO-301   | Biology    |
+| Srinivasan | CS-101    | Comp. Sci. |
+| Katz       | CS-101    | Comp. Sci. |
+| Brandt     | CS-190    | Comp. Sci. |
+| Brandt     | CS-190    | Comp. Sci. |
+| Srinivasan | CS-315    | Comp. Sci. |
+| Katz       | CS-319    | Comp. Sci. |
+| Srinivasan | CS-347    | Comp. Sci. |
+| Kim        | EE-181    | Elec. Eng. |
+| Wu         | FIN-201   | Finance    |
+| El Said    | HIS-351   | History    |
+| Mozart     | MU-199    | Music      |
+| Einstein   | PHY-101   | Physics    |
++------------+-----------+------------+
+
+9] Find the names of all instructor whose salary is grater than at least one instructor in the biology department.
+
+mysql> select name from instructor where (select salary from instructor where dept_name = 'Biology') < salary;
++----------+
+| name     |
++----------+
+| Wu       |
+| Einstein |
+| Gold     |
+| Katz     |
+| Singh    |
+| Brandt   |
+| Kim      |
++----------+
+
+10] Find the names of all departments whose building name includes substring ‘watson’
+
+mysql> select dept_name from department where building = 'Watson';
++-----------+
+| dept_name |
++-----------+
+| Biology   |
+| Physics   |
++-----------+
+
+11] Find the names of all departments whose building name beginning with ‘wat’.
+
+mysql> select dept_name from department where building LIKE 'Wat%';
++-----------+
+| dept_name |
++-----------+
+| Biology   |
+| Physics   |
++-----------+
+
+12] Find the names of all departments whose building name ending with ‘son’. 
+
+mysql> select dept_name from department where building LIKE '%son';
++-----------+
+| dept_name |
++-----------+
+| Biology   |
+| Physics   |
++-----------+
+
+13] Find the names of all departments whose building name consist of 6 letters.
+
+mysql> select dept_name from department where building LIKE '______';
++------------+
+| dept_name  |
++------------+
+| Biology    |
+| Comp. Sci. |
+| Elec. Eng. |
+| Physics    |
++------------+
+
+14] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
